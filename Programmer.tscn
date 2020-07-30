@@ -1,0 +1,78 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://textures/programmer/run/programmer_run1.png" type="Texture" id=1]
+[ext_resource path="res://programmer.gd" type="Script" id=2]
+[ext_resource path="res://textures/programmer/idle/programmer_idle.png" type="Texture" id=3]
+[ext_resource path="res://textures/programmer/run/programmer_run3.png" type="Texture" id=4]
+[ext_resource path="res://textures/programmer/run/programmer_run4.png" type="Texture" id=5]
+[ext_resource path="res://textures/programmer/run/programmer_run5.png" type="Texture" id=6]
+[ext_resource path="res://textures/programmer/run/programmer_run2.png" type="Texture" id=7]
+[ext_resource path="res://textures/programmer/run/programmer_run6.png" type="Texture" id=8]
+[ext_resource path="res://textures/programmer/jump/programmer_fall1.png" type="Texture" id=9]
+[ext_resource path="res://textures/programmer/jump/programmer_jump3.png" type="Texture" id=10]
+[ext_resource path="res://textures/programmer/jump/programmer_jump4.png" type="Texture" id=11]
+[ext_resource path="res://textures/programmer/jump/programmer_jump5.png" type="Texture" id=12]
+[ext_resource path="res://textures/programmer/jump/programmer_jump1.png" type="Texture" id=13]
+[ext_resource path="res://textures/programmer/jump/programmer_fall2.png" type="Texture" id=14]
+[ext_resource path="res://textures/programmer/jump/programmer_fall4.png" type="Texture" id=15]
+[ext_resource path="res://textures/programmer/jump/programmer_fall3.png" type="Texture" id=16]
+[ext_resource path="res://textures/programmer/jump/programmer_fall5.png" type="Texture" id=17]
+[ext_resource path="res://textures/programmer/jump/programmer_jump2.png" type="Texture" id=18]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "fall",
+"speed": 6.99
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 18 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "jump",
+"speed": 7.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 0, 0.5 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+frames = SubResource( 1 )
+animation = "jump"
+frame = 4
+playing = true
+
+[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 2 )
+
+[node name="Dash" type="Timer" parent="KinematicBody2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCD" type="Timer" parent="KinematicBody2D"]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="KinematicBody2D/Dash" to="KinematicBody2D" method="_on_Dash_timeout"]
+[connection signal="timeout" from="KinematicBody2D/DashCD" to="KinematicBody2D" method="_on_DashCD_timeout"]
