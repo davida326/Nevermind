@@ -18,28 +18,28 @@ func _physics_process(delta):
 	
 	motion.y += GRAVITY
 	
+	
 	if Input.is_action_pressed("ui_right"):
 		if not dash:
 			motion.x = min(motion.x + ACCELERATION, MAX_SPEED)
-			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("run")
-		else:
-			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("dash")
-			motion.x = DASH
+			$AnimatedSprite.flip_h = false
+			if on_ground:
+				$AnimatedSprite.play("run")
 	elif Input.is_action_pressed("ui_left"):
 		if not dash:
 			motion.x = max(motion.x - ACCELERATION, -MAX_SPEED)
-			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("run")
-		else:
-			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("dash")
-			motion.x = -DASH
+			$AnimatedSprite.flip_h = true
+			if on_ground:
+				$AnimatedSprite.play("run")
 	else:
 		$AnimatedSprite.play("idle")
-		dash = false
 		motion.x = lerp(motion.x, 0, 0.2)
+		
+	if dash:
+		if $AnimatedSprite.flip_h:
+			motion.x = -DASH
+		else:
+			motion.x = DASH
 	
 	if dash_ready and Input.is_action_just_pressed("ui_dash"):
 		dash = true
@@ -52,10 +52,16 @@ func _physics_process(delta):
 			motion.y = JUMP_HEIGHT
 			jump_count += 1
 			on_ground = false
+			
 	
-	if position.y > 500:
+	if position.y > 1000:
 		position.x = 0
-		position.y = 0
+		position.y = -600
+
+	if position.x < -592:
+		position.x += 1856
+	elif position.x >= 1264:
+		position.x -= 1856
 	
 	motion = move_and_slide(motion, UP)
 	
@@ -64,11 +70,14 @@ func _physics_process(delta):
 			on_ground = true
 			jump_count = 0
 	else:
+		$AnimatedSprite.play("sky")
 		if on_ground:
 			on_ground = false
 			jump_count = 1
-		if not dash:
-			$AnimatedSprite.play("sky")
+	
+	if dash:
+		$AnimatedSprite.play("dash")
+	
 	pass
 
 func _on_DashCD_timeout():

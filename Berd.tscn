@@ -21,14 +21,14 @@ animations = [ {
 "name": "sky",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
