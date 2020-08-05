@@ -1,0 +1,143 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://textures/programmer/run/programmer_run1.png" type="Texture" id=1]
+[ext_resource path="res://scripts/programmer.gd" type="Script" id=2]
+[ext_resource path="res://textures/programmer/idle/programmer_idle.png" type="Texture" id=3]
+[ext_resource path="res://textures/programmer/run/programmer_run3.png" type="Texture" id=4]
+[ext_resource path="res://textures/programmer/run/programmer_run4.png" type="Texture" id=5]
+[ext_resource path="res://textures/programmer/run/programmer_run5.png" type="Texture" id=6]
+[ext_resource path="res://textures/programmer/run/programmer_run2.png" type="Texture" id=7]
+[ext_resource path="res://textures/programmer/run/programmer_run6.png" type="Texture" id=8]
+[ext_resource path="res://textures/programmer/jump/programmer_fall1.png" type="Texture" id=9]
+[ext_resource path="res://textures/programmer/dash/programmer_dash.png" type="Texture" id=10]
+[ext_resource path="res://textures/programmer/slide/programmer_slide.png" type="Texture" id=11]
+[ext_resource path="res://textures/programmer/jump/programmer_jump5.png" type="Texture" id=12]
+[ext_resource path="res://textures/programmer/crouch/programmer_crouch.png" type="Texture" id=13]
+[ext_resource path="res://textures/programmer/jump/programmer_fall2.png" type="Texture" id=14]
+[ext_resource path="res://textures/programmer/jump/programmer_fall4.png" type="Texture" id=15]
+[ext_resource path="res://textures/programmer/jump/programmer_fall3.png" type="Texture" id=16]
+[ext_resource path="res://textures/programmer/jump/programmer_fall5.png" type="Texture" id=17]
+[ext_resource path="res://textures/background/sky.png" type="Texture" id=18]
+[ext_resource path="res://scripts/programmer_area2d.gd" type="Script" id=19]
+[ext_resource path="res://scenes/Health.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/Magic.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/Stamina.tscn" type="PackedScene" id=22]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "slide",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "jump",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "fall",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "crouch",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+[node name="programmer" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="programmer" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="programmer"]
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="programmer"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Stamina" parent="programmer/Camera2D" instance=ExtResource( 22 )]
+margin_left = -300.0
+margin_top = 108.0
+margin_right = -300.0
+margin_bottom = 108.0
+
+[node name="Health" parent="programmer/Camera2D" instance=ExtResource( 20 )]
+margin_left = -300.0
+margin_top = 184.0
+margin_right = -300.0
+margin_bottom = 184.0
+
+[node name="Magic" parent="programmer/Camera2D" instance=ExtResource( 21 )]
+margin_left = -300.0
+margin_top = 147.0
+margin_right = -300.0
+margin_bottom = 147.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="programmer"]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 2 )
+
+[node name="Dash" type="Timer" parent="programmer"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Hand" type="Position2D" parent="programmer"]
+position = Vector2( 0, 5 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="programmer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="programmer/ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_mirroring = Vector2( 512, 298 )
+
+[node name="Sprite" type="Sprite" parent="programmer/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 18 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="programmer"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="programmer/Area2D"]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 2 )
+
+[node name="stamina_regen" type="Timer" parent="programmer"]
+one_shot = true
+
+[node name="mana_regen" type="Timer" parent="programmer"]
+one_shot = true
+[connection signal="timeout" from="programmer/Dash" to="programmer" method="_on_Dash_timeout"]
+[connection signal="body_entered" from="programmer/Area2D" to="programmer/Area2D" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="programmer/stamina_regen" to="programmer" method="_on_stamina_regen_timeout"]
+[connection signal="timeout" from="programmer/mana_regen" to="programmer" method="_on_mana_regen_timeout"]

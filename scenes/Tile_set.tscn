@@ -306,3 +306,17 @@ region_rect = Rect2( 192, 96, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="21/KinematicBody2D"]
 shape = SubResource( 8 )
+
+[node name="22" type="Sprite" parent="."]
+position = Vector2( 160, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 192, 160, 32, 32 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="22"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="22/KinematicBody2D"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+one_way_collision = true
