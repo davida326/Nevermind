@@ -35,6 +35,16 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "crouch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": false,
 "name": "jump",
@@ -49,16 +59,6 @@ animations = [ {
 "loop": false,
 "name": "fall",
 "speed": 7.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "dash",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "crouch",
-"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tile_sets/Tile_set.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/programmer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/f_block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Berd.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/chest.tscn" type="PackedScene" id=6]
 
 [node name="Node" type="Node"]
 
@@ -23,9 +24,10 @@ position = Vector2( 16, -272 )
 
 [node name="programmer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 688, 226 )
+z_index = 4
 
-[node name="Berd" parent="programmer" instance=ExtResource( 5 )]
-position = Vector2( -592, -42 )
+[node name="Berd" parent="." instance=ExtResource( 5 )]
+position = Vector2( 96, 184 )
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 832, 200 )
@@ -38,3 +40,10 @@ position = Vector2( 1136, 72 )
 
 [node name="coin4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 528, -256 )
+
+[node name="chest" parent="." instance=ExtResource( 6 )]
+show_behind_parent = true
+light_mask = 1
+position = Vector2( 390.472, 446.562 )
+z_index = -1
+z_as_relative = true

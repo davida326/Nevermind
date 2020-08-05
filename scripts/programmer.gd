@@ -134,6 +134,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.play("slide")
 
+	
 func _on_Dash_timeout():
 	dash = false
 
