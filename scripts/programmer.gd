@@ -30,7 +30,13 @@ func throw_mug():
 
 func add_coin(amount):
 	coin += amount
-	print("Coins: ", coin)
+	$Camera2D/Coin_counter.set_value(coin)
+
+func key_pickup(color):
+	$Camera2D/key_bar.get_node(color).visible = true
+
+func key_use(color):
+	$Camera2D/key_bar.get_node(color).visible = false
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
@@ -134,7 +140,6 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.play("slide")
 
-	
 func _on_Dash_timeout():
 	dash = false
 

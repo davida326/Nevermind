@@ -23,6 +23,8 @@ config/icon="res://textures/icon/icon.png"
 
 mouse_cursor/custom_image="res://textures/cursor/cursor.png"
 mouse_cursor/custom_image_hotspot=Vector2( 24, 10 )
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -89,4 +91,5 @@ ui_interact={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://tile_sets/default_env.tres"
