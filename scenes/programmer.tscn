@@ -71,6 +71,7 @@ __meta__ = {
 }
 
 [node name="programmer" type="KinematicBody2D" parent="."]
+position = Vector2( 16, 34 )
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 2 )
