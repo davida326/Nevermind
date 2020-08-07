@@ -38,6 +38,9 @@ func key_pickup(color):
 func key_use(color):
 	$Camera2D/key_bar.get_node(color).visible = false
 
+func damage(value):
+	$Camera2D/Health/ProgressBar.value -= value
+
 # warning-ignore:unused_argument
 func _physics_process(delta):
 	

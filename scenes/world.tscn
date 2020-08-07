@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://tile_sets/Tile_set.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/programmer.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/r_chest.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/b_chest.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/door.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=14]
 
 [node name="world" type="Node"]
 
@@ -30,7 +31,7 @@ __meta__ = {
 position = Vector2( 16, -272 )
 
 [node name="Berd" parent="." instance=ExtResource( 5 )]
-position = Vector2( 96, 184 )
+position = Vector2( 688, 416 )
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 832, 192 )
@@ -73,10 +74,13 @@ position = Vector2( 1280, 480 )
 position = Vector2( 800, 512 )
 
 [node name="Position2D" type="Position2D" parent="door"]
-position = Vector2( -592, -352 )
+position = Vector2( -640, -704 )
 
 [node name="door2" parent="." instance=ExtResource( 13 )]
-position = Vector2( 208, 160 )
+position = Vector2( 160, -192 )
 
 [node name="Position2D" type="Position2D" parent="door2"]
-position = Vector2( 592, 352 )
+position = Vector2( 640, 704 )
+
+[node name="enemy" parent="." instance=ExtResource( 14 )]
+position = Vector2( 16, 160 )
