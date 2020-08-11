@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/programmer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/f_block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Berd.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/y_key.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/r_key.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/b_key.tscn" type="PackedScene" id=8]
@@ -12,8 +11,9 @@
 [ext_resource path="res://scenes/y_chest.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/r_chest.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/b_chest.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/door.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/y_door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/g_door.tscn" type="PackedScene" id=15]
 
 [node name="world" type="Node"]
 
@@ -27,11 +27,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="programmer" parent="." instance=ExtResource( 2 )]
+position = Vector2( 672, 192 )
+z_index = 4
+
 [node name="f_block" parent="." instance=ExtResource( 3 )]
 position = Vector2( 16, -272 )
-
-[node name="Berd" parent="." instance=ExtResource( 5 )]
-position = Vector2( 688, 416 )
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 832, 192 )
@@ -40,26 +41,22 @@ position = Vector2( 832, 192 )
 position = Vector2( 960, 128 )
 
 [node name="coin3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1136, 64 )
+position = Vector2( 1184, 64 )
 
 [node name="coin4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 528, -256 )
+position = Vector2( 544, -256 )
 
 [node name="y_key" parent="." instance=ExtResource( 6 )]
-position = Vector2( 528, 176 )
+position = Vector2( 512, 160 )
 
 [node name="r_key" parent="." instance=ExtResource( 7 )]
-position = Vector2( 528, 272 )
+position = Vector2( 512, 256 )
 
 [node name="g_key" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1168, 272 )
+position = Vector2( 1152, 256 )
 
 [node name="b_key" parent="." instance=ExtResource( 8 )]
-position = Vector2( -80, -496 )
-
-[node name="programmer" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672, 192 )
-z_index = 4
+position = Vector2( -96, -512 )
 
 [node name="y_chest" parent="." instance=ExtResource( 10 )]
 position = Vector2( 384, 448 )
@@ -70,17 +67,29 @@ position = Vector2( 1472, -352 )
 [node name="b_chest" parent="." instance=ExtResource( 12 )]
 position = Vector2( 1280, 480 )
 
-[node name="door" parent="." instance=ExtResource( 13 )]
+[node name="enemy" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1248, 224 )
+
+[node name="y_door" parent="." instance=ExtResource( 13 )]
 position = Vector2( 800, 512 )
 
-[node name="Position2D" type="Position2D" parent="door"]
+[node name="Position2D" type="Position2D" parent="y_door"]
 position = Vector2( -640, -704 )
 
-[node name="door2" parent="." instance=ExtResource( 13 )]
+[node name="y_door2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 160, -192 )
 
-[node name="Position2D" type="Position2D" parent="door2"]
+[node name="Position2D" type="Position2D" parent="y_door2"]
 position = Vector2( 640, 704 )
 
-[node name="enemy" parent="." instance=ExtResource( 14 )]
-position = Vector2( 16, 160 )
+[node name="g_door" parent="." instance=ExtResource( 15 )]
+position = Vector2( 1376, 480 )
+
+[node name="Position2D" type="Position2D" parent="g_door"]
+position = Vector2( -1376, -1312 )
+
+[node name="g_door2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 0, -832 )
+
+[node name="Position2D" type="Position2D" parent="g_door2"]
+position = Vector2( 1376, 1312 )

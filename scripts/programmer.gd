@@ -40,6 +40,9 @@ func key_use(color):
 
 func damage(value):
 	$Camera2D/Health/ProgressBar.value -= value
+	if $Camera2D/Health/ProgressBar.value <= 0:
+# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://scenes/start_menu.tscn")
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
