@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://textures/npc/Layer 1_sprite_1.png" type="Texture" id=1]
+[ext_resource path="res://textures/npc/Layer 1_sprite_2.png" type="Texture" id=2]
+[ext_resource path="res://scripts/melee enemy.gd" type="Script" id=3]
+[ext_resource path="res://scripts/melee enemyarea.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Latoszog.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16.0386, 33.9163 )
+
+[node name="melee enemy" type="KinematicBody2D"]
+position = Vector2( 0.993226, 24 )
+collision_layer = 64
+script = ExtResource( 3 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 13, 3 )
+enabled = true
+cast_to = Vector2( 0, 35 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 3.23323, -1.75393 )
+frames = SubResource( 1 )
+animation = "move"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="Body" type="Area2D" parent="."]
+collision_layer = 128
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Body"]
+position = Vector2( 0.496613, 1.91629 )
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 31.0068, -8 )
+
+[node name="Latoszog" type="Area2D" parent="."]
+position = Vector2( -0.993226, -24 )
+rotation = 6.28319
+collision_layer = 64
+collision_mask = 4
+script = ExtResource( 5 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Latoszog"]
+position = Vector2( 32, 3.57628e-06 )
+scale = Vector2( -1, 1 )
+polygon = PoolVector2Array( 32, -5.48363e-06, -158.252, 61.8363, -363.109, 63, -366.109, -70, -160, -66.508 )
+
+[node name="Loosing" type="Timer" parent="Latoszog"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Lost" type="Timer" parent="Latoszog"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Vision" type="RayCast2D" parent="."]
+enabled = true
+[connection signal="body_entered" from="Body" to="Body" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Latoszog" to="Latoszog" method="_on_Latoszog_body_entered"]
+[connection signal="body_exited" from="Latoszog" to="Latoszog" method="_on_Latoszog_body_exited"]
+[connection signal="timeout" from="Latoszog/Loosing" to="Latoszog" method="_on_Alert_timeout"]
+[connection signal="timeout" from="Latoszog/Lost" to="Latoszog" method="_on_Lost_timeout"]

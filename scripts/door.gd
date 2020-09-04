@@ -11,9 +11,9 @@ func _process(delta):
 #			player.key_use($Label.text)
 			player.global_position = get_parent().get_node(self.get_name()).get_node("Position2D").global_position
 			#korrekció
-			player.global_position.x += 16
-			player.global_position.y += 34
-
+			player.global_position += Vector2(16, 34)
+#			player.global_position.x += 16
+#			player.global_position.y += 34
 
 func _on_Area2D_body_entered(body):
 	if body.get_name() == "programmer":

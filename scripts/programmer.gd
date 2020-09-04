@@ -8,7 +8,14 @@ const JUMP_HEIGHT = -500
 const ACCELERATION = 20
 const THROW_SPEED = 300
 const MUG = preload("res://scenes/mug.tscn")
+const DEVIL_TEXT = ["If you want to interact with me, press E",
+					"Dear brother, I don't spread rumors... I create them!",
+					"I used to be an adventurer like you, but I took an arrow in the knee",
+					"Ni!",
+					"I don't know you and I don't care to know you",
+					"Error: Please try again"]
 
+var canbuy = false
 var motion = Vector2()
 var dash = false
 var crouch = false
@@ -43,18 +50,28 @@ func damage(value):
 	if $Camera2D/Health/ProgressBar.value <= 0:
 # warning-ignore:return_value_discarded
 		get_tree().change_scene("res://scenes/start_menu.tscn")
+	elif $Camera2D/Health/ProgressBar.value > $Camera2D/Health/ProgressBar.max_value:
+		$Camera2D/Health/ProgressBar.value = $Camera2D/Health/ProgressBar.max_value
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
+	
+	motion.y += GRAVITY
 	
 	if Input.is_action_just_pressed("ui_menu"):
 # warning-ignore:return_value_discarded
 		get_tree().change_scene("res://scenes/start_menu.tscn")
 	
-	motion.y += GRAVITY
+	if Input.is_action_just_pressed("ui_interact") and canbuy:
+		if not $Camera2D/shop.visible:
+			var szam = randi() % len(DEVIL_TEXT)
+			$Camera2D/shop/TextEdit.bbcode_text = "[center]{text}[/center]".format({"text":DEVIL_TEXT[szam]})
+		$Camera2D/shop.visible = true
+	if not canbuy:
+		$Camera2D/shop.visible = false
 	
-	if Input.is_action_just_pressed("ui_focus_next"):
-		$Camera2D/Health/ProgressBar.value = 12
+#	if Input.is_action_just_pressed("ui_focus_next"):
+#		$Camera2D/Health/ProgressBar.value = 12
 	
 	if Input.is_action_just_pressed("ui_attack"):
 		throw_mug()
