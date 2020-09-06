@@ -5,18 +5,30 @@ Inventories
 
 **Inventory**
 
-.. image:: ./programmerkulcs.gif
+.. list-table::
+   :align: left
+   
+   * - .. image:: ./programmerkulcs.gif
+               :align: center
+     - .. image:: ./gold.png
+               :align: center
+     - .. image:: ./keyblue.png
+               :align: center
+               :scale: 200 %
+     - .. image:: ./keyred.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./gold.png
+     - .. image:: ./yellowkey.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./keyblue.png
-
-.. image:: ./keyred.png
-
-.. image:: ./yellowkey.png
-
-.. image:: ./greenkey.png
-
+     - .. image:: ./greenkey.png
+             :scale: 200 %
+             :align: center
+     - .. image:: ./potion_0.png
+             :scale: 200 %
+             :align: center
 
 A főhős karakternek inventoryja, kulcsok és arany tárolására alkalmas.
 Kulcsokból négy féle szín van, a kulcsok mindig a saját színükhöz megfelelő zárakat tudnak kinyitni.
@@ -36,26 +48,52 @@ A kulcsok ténylegesen megjelennek a karakter oldalán, így láthatja a játék
 Ha a játékos több kulcsot hord magánál, azok hangot adnak ki ami felriaszthatja a közeli őröket.
 pro tipp: érdemes lehet később összeszedni a kulcsokat, miután az ellenségeket a játékos legyőzte.
 
-.. image:: ./keyblue.png
+.. list-table::
+   :align: left
+   
+ 
+   * - .. image:: ./keyblue.png
+               :align: center
+               :scale: 200 %
+     - .. image:: ./keyred.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./keyred.png
+     - .. image:: ./yellowkey.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./yellowkey.png
+     - .. image:: ./greenkey.png
+             :scale: 200 %
+             :align: center
+     - .. image:: ./lada.gif
+             :align: center
+     - .. image:: ./ajto.gif
+             :align: center
 
-.. image:: ./greenkey.png
-
-.. image:: ./lada.gif
-
-.. image:: ./ajto.gif
 
 **Arany**
+
+.. image:: ./gold.png
+   :align: left
 
 Az arany, itt a pénznem amivel a játékos az ördögtől tud vásárolni upgrade-eket a képességeihez.
 Ezáltal több lehet a mana, élet, állóképesség töltéseinek a száma, és a halálképességeihez tartozó képesség fát is itt tudja kialakítani.
 Aranyat a játékos a legyőzött ellenfeleinél találhat, illetve elrejtett ládákban.
 
-.. image:: ./gold.png
+
 
 .. TODO: Mennyi tárgy lehet egyszerre egy karakternél?
 
 A játékos bármennyi aranyat tarthat magánál, nincs rá korlátozás.
+
+**Potion**
+
+.. image:: ./potion_0.png
+      :scale: 200 %
+      :align: left
+
+Potion-t a játékos a pályán véletlenszerűen elszórt helyeken találhat.
+Fő funkciója hogy a növeli a játékos életét, ezért érdemes a játékosnak ezeket tartalékolnia mivel a potion az egyetlen életszerzési módszer.
+
+

@@ -1,23 +1,49 @@
 Controls
 ========
-
+.. |br| raw:: html
+   <br />
 Billentyű és egér kezelés
 -------------------------
 
 .. TODO: Billentyűzet, egér vagy bármilyen egyéb kontroller szerepét átgondolni, és részletezni.
 
-Karakter mozgása:
+.. list-table:: Karakter mozgása
+   :align: left
+   :widths: 5 10
 
-W - Ugrás
+   * - .. image:: ./w.png
+           :height: 35
+           :width: 35
+           :align: center 
+     - Ugrás.
+   * - .. image:: ./d.png
+           :height: 35
+           :width: 35
+           :align: center
+     - A karakter jobbra halad.
+   * - .. image:: ./a.png
+            :height: 35
+            :width: 35
+            :align: center
+     - Guggolás
+   * - .. image:: ./s.png
+            :height: 35
+            :width: 35
+            :align: center
+     - A karakter balra halad 
+   * - .. image:: ./space.png
+            :height: 35
+            :width: 100
+            :align: center
 
-D - A karakter jobbra halad
-  - Dupla megnyomás esetén jobbra hajtunk végre egy dash mozgást.
+     - A karakter végrehajt egy dash abba az irányba, amerre éppen néz.
 
+   * - .. image:: ./e.png
+         :height: 35
+         :width: 35
+         :align: center
 
-A - A karakter balra halad 
-  - Dupla megnyomás esetén balra hajtunk végre egy dash mozgást.
-
-E - Interakció gomb 
+     - Interakció gomb 
 
 Interackióra szükségünk van:
 
@@ -33,9 +59,20 @@ Interackióra szükségünk van:
 
 Egérrel navigálhatunk a menü-ben, illetve az Ördög boltjában is.
 
-Bal egérgomb - Közelharci támadást hajtunk végre.
+.. list-table::
+   :widths: 10 50
+   :align: left
 
-Jobb egérgomb - Speciális képesség használata
+   * - .. image:: ./left.png
+                :height: 50
+                :width: 35
+                :align: center
+     - Bögrét dobást hajhatunk végre, az egérkurzor irányába.
+   * - .. image:: ./right.png
+                :height: 50
+                :width: 35
+                :align: center
+     - Jobb egérgomb - Speciális képesség használata
 
 Grafikus elemek
 ---------------
@@ -45,6 +82,8 @@ Grafikus elemek
 A játék indításakor a főmenüben találjuk magunkat, ahol navigálhatunk a hogy éppen mit szeretnénk végrehajtani.
 Főmenüből elérhető:
 
+.. image:: ./menu.png
+
 * Játék indítása - Elindíjta a legutolsó játékot, az aktuális állapottal.
 
 * Beállítások -  beállítások menüpontban lehetőségünk van a billentyűzet kiosztás átállítására, felbontás, hang erősség beállítására.
@@ -52,6 +91,9 @@ Főmenüből elérhető:
 * Mentések betöltésére - itt előző játékok lementett állapotaitól folytathatjuk a játékot.
 
 A játékban beszélgethetünk semleges karakterekkel, ezek közül fontosabb kiemelést érdemel az Ördög karakter.
+
+.. image:: ./devilspeech.png
+
 Nála vásárolhat a főhős, Speciális képességeihez fejlesztéseket, illetve passzív attribútum növelésre is van lehetősége, meghatározott mennyiségű aranyért cserébe.
 Itt menü rendszerben jelenik meg a vásárlás, ahol az egérrel vagy a nyilakkal navigálhat a felhasználó.
 Amint a játékos kijelöl valamit a várárlás menüben, annak megjelenik a hozzá tartozó ára.

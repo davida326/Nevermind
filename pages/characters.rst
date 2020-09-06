@@ -1,31 +1,42 @@
 ############
-Characters
+Karakterek
 ############
 
 .. TODO: A karakterek attribútumait összegyűjteni!
 
-Attribútumok
+Attribútumok  
 ------------
+
 
 **Élet attribútum**
 
-.. image:: ./heart.png
+.. list-table::
+   :align: left
 
+   * - .. image:: ./heart.png
+         :align: center
+
+     - .. image:: ./potion_0.png
+         :scale: 200 %
+         :align: center
+
+
+   
 Az élet attribútum arra szolgál hogy, a felhasználó számára megjelenítse mennyi sebzést tud még elviselni, mielőtt meghal.
-Ez az attribútum a játékban úgy néz ki hogy, van egy elem amiben vannak töltések.
-Minden töltés két részből áll, amint sebzés éri a játékost, az töltés kettéhasad és a fele marad meg.
-Kezdetben három egész töltéssel kezd a játékos, ami később növelhető upgrade-ek vásárlásával.
+Játékon belül ez egy életcsík-ként jelenik meg, mivel az ellefelek sebzése véletlenszerű ezért a játékosnak folyton figyelemmel kell kísérnie, ha nem szeretne korán elhalálozni.
 Az ellenfeleknek is van élet attribútuma és itt is ugyanígy működik.
-    
+Amennyiben a játékost sebzés éri, lehetősége van az életét visszatölteni Health Potion segítségével.
+
 
 **Állóképesség/kitartás(Stamina) attribútum**
 
 .. image:: ./Stamina.png
 
 
-Néhány képesség mint például a sprintelés és a "dash" használata Állóképesség erőforrást használ, így amikor igénybe veszi a játékos ezeket, csökken az Állóképessége.
+Néhány képesség mint például a dupla ugrás és a "dash" használata Állóképesség erőforrást használ, így amikor igénybe veszi a játékos ezeket, csökken az Állóképessége.
 Ez az attribútum regenerálódik, amint a játékos nem használ ilyen erőforrást igényő képességet.
-Itt is hasonlóan az élet attribútumhoz, kezdetben 3 töltéssel kell gazdálkodnia a játékosnak.
+Itt is hasonlóan az élet attribútumhoz, a játékon belül staminacsík-ként jelenik meg.
+Az ellenfeleknek nincs ilyen attribútumuk.
 
 
 **Mana attribútum**
@@ -34,33 +45,52 @@ Itt is hasonlóan az élet attribútumhoz, kezdetben 3 töltéssel kell gazdálk
 
 
 Ezt az erőforrást a játékos haláltípushoz kapcsolódó képességekkel veszi igénybe.
-Minden képesség támadáshoz fél manatöltést használ. A manatöltések regenrálódnak abban az esetben, ha a játékos nem használ manát igénybevevő képességet.
+Minden képesség támadáshoz manát fogyaszt, így figyelembe kell vennie a játékosnak hogy egyáltalán van-e elég manája, a választott képességhez.
+A manaszint regenrálódnak abban az esetben, ha a játékos nem használ manát igénybevevő képességet.
 Itt is mint az Élet és Állóképesség attribútumok is növelhetők ugrade-ek vásárlásával.
-A mana töltések száma három darab.
+Az ellenfeleknek nincs ilyen attribútumuk.
 
 **Gold**
 
-.. image:: ./gold.png
+.. list-table::
+   :align: left
+   
+   * - .. image:: ./gold.png
+         :align: center
+     - .. image:: ./plus.png
+         :align: center
+         :width: 50
+         :height: 50
+     - .. image:: ./knife.png
+         :align: center
+     - .. image:: ./equal.png
+         :align: center
+         :width: 50
+         :height: 50 
+     - .. image:: ./devilhappy.png
+         :align: center
 
-.. image:: ./ordog.png
+
 
 
 Az aranynak a játékban fontos szerepe van mivel, ezt felhasználva vásárolhat a játékos az ördög npc-től upgrade-eket.
 Lehetősége van a játékosnak, képesség, attribútum növelő fejlesztések vásárlására.
-Aranyat a játékos a legyőzött ellenségektől és küldetések teljesítésével szerezhet.
-
+Aranyat a játékos a legyőzött ellenségektől, küldetések teljesítésével és a pálya rejtett részein szerezhet.
 
 
 **Key**
 
 
 .. image:: ./keyblue.png
+         :scale: 150 %
 
 .. image:: ./keyred.png
-
+         :scale: 150 %
 .. image:: ./yellowkey.png
-
+         :scale: 150 %
+         
 .. image:: ./greenkey.png
+         :scale: 150 %
 
 .. image:: ./lada.gif
 
@@ -82,27 +112,31 @@ Ellenfélből két féle lesz: egy közelharci és egy távharcos.(lövöldöz r
 A főhős:
 ---------
 .. image:: ./programmer.png
-
+.. image:: ./mug.png
+           :scale: 200 %
 
 A játék során ő az egyetlen irányítható karakter. Közelharci támadása bármilyen haláltípusnál használható, ami nem igényel manát.
 A közelharci támadáshoz legalább 1 block közel kell állnia a játékosnak az ellenféltől.
 Közelharci támadást minden haláltípus karakterrel végre lehet hajtani.
+A programozó karakter speciális képessége a bögréjének elhajítása.
+Ez elsőre nem tűnhet félelmetes támadásnak, ám igen hatékony, mivel a programozó karakternek nagy gyakorlata van benne.
+
 
 Attribútumai:
 
-* Sebzés: nincs, mivel ő emberként nem támadhat
+* Sebzés: Bögre hajítás (1-3)
 
-* Élet: 3 töltés(6)
+* Élet: 12
 
-* Állóképesség: 3 töltés(6)
+* Állóképesség: 12
 
-* Mana: 3 töltés(6)
+* Mana: 12
 
-* Mozgási sebesség: 200(Max)
+* Mozgási sebesség: 300(Max)
 
 * Karakter inventory: arany(helyi fizetőeszköz), kulcsok (maximum 4 db különböző színű kulcs lehet nála)
 
-A különböző halálképességeinek sebzése 1.5 töltés(kezdetben, ez később fejleszthető), ezeknek használata 1 manatöltés.
+A különböző halálképességeinek sebzése 1.5-3.5 (kezdetben, ez később fejleszthető), ezeknek használata 3 manapont.
 A képességeket 2 másodperc lehülési idő elteltével használhatja.
 
 Főhős halálképességei:
@@ -120,9 +154,9 @@ Passzív képességének tekinthető hogy tud repülni és emiatt többé képte
 Speciális képességéhez a karmait használja amit mélyen az ellenfélbe mélyeszt, ennek a képességnek az ára 1 manatöltés.
 Miután használta a képességet, jelentkezni fog egy lehülési idő ami 2 másodperc, ezt követően tudja újra használni a képességet, abban az esetben ha van elegendő manája.
 
-* A képesség sebzése: 2 töltés
+* A képesség sebzése: 4
 
-* Mozgási sebesség: 300(Max)
+* Mozgási sebesség: 450(Max)
 
 **Tűz halálképesség**
 
@@ -135,9 +169,9 @@ Ekkor a játékos egy láng démonná alakul, és emiatt többet nem sebezheti a
 Speciális képessége, hogy egy tűzgolyót lő az ellensége felé.
 A képesség használata után 2 másodperc lehülési idő, lép életbe.
 
-* A képesség sebzése: 1.5 töltés
+* A képesség sebzése: 3-4
 
-* Mozgási sebesség: 200(Max)
+* Mozgási sebesség: 300(Max)
 
 **Vas halálképesség**
 
@@ -149,24 +183,28 @@ Főhősünk ezzel a halálképességgel fog újraéledni.
 Speciális képessége, hogy hosszú karjait használva egy erőütést hajt végre.
 A képesség használata után 2 másodperc lehülési idő, lép életbe.
 
-* A képesség sebzése: 2.5 töltés
+* A képesség sebzése: 3-5 
 
-* Mozgási sebesség: 120(Max)
+* Mozgási sebesség: 200(Max)
 
 A gépfegyveres kolléga:
 ----------------------
 .. image:: ./thugnon.png
 
-Ellenséges npc, általában őrt áll valahol és figyel a behatolókra.
-Észreveszi és megtámadja a főhőst, amint az 15 block közel helyezkedik el tőle és nincs takarásban.
+Ellenséges npc, általában őrt áll valahol vagy éppen járőrözik.
+Amint a játékos bekerül a látóterébe, a kolléga megtámadja őt.
+A játékosnak vigyáznia kell vele mert ő távolról is képes igen nagy sebzést okozni. Érdemes fedezékből fedezékbe közelíteni hozzá.
+Az kollégának 15 block távolságú a látótere.
+
 
 Attribútumai:
+* Sebzés: 2-4
 
-* Élet: 2 töltés(4)
+* Élet: 8
 
 * Mana: nincs
 
-* Állóképesség: 3 töltés (6) 
+* Állóképesség: nincs 
 
 Amikor támad a játékosra, és az túl közel kerül, megpróbál elmenekülni és távolról újra felvenni vele a harcot.
 (megpróbál 10 block távolságra lenni tőle és újra tüzel)
@@ -178,22 +216,23 @@ Lángszórós rosszfiú:
 .. image:: ./flame.png
 
 Ellenséges npc, amint észreveszi a főhőst, megpróbál közel kerülni hozzá és a lángszórójával elégetni.
-(3-5 block közel kell kerüljön a főhős karakterhez hogy támadni tudjon)
 
 Attribútumai:
 
-* Élet: 4 töltés(8)
+* Sebzés: 1-3
+
+* Élet: 10
 
 * Mana: nincs
 
-* Állóképesség: 2 töltés(4)
+* Állóképesség: nincs
 
 A játékos felhasználót 15 block távolságról kiszúrja, és ha nincs takarásban, elindul felé hogy támadjon.
 Mozgási sebesség: 150(Max)
 
 Ördög
 -----
-.. image:: ./ordog.png
+.. image:: ./devilinhell.png
 
 Semleges npc, a főhős főnöke...
 A játékos tőle tud vásárolni fejlesztéseket a speciális képességeihez, illetve passzív upgrade-eket is vehet mint például Élet, Mana, Állóképesség növelés.
@@ -215,4 +254,21 @@ Minden haláltípushoz egyedi skill-fa társul. A képességek fejlesztésére v
 A fejlesztések vásárlásával a képességek kevesebb manát használnak illetve nagyobb sebzést tesz lehetővé, ami az előrehaladást igencsak megkönnyíti.
 
 .. TODO: Megjelenítéssel, előnyökkel/hátrányokkal kapcsolatos leírások.
+
+Megjelenítés
+-----------
+
+Karakterek szempontjából 64x64 pixel felbontás mellett döntöttünk és ehhez mérten próbáltuk méretezni a többi elemet.
+Úgy gondoltuk hogy ez ideális méret a karaktereknek, és mivel mindkettőnknek hasonlított az elképzeléséhez a végeredmény ezért ennél maradtunk.
+
+.. image:: ./respiskel.png
+            :align: left
+.. image:: ./devilpiskel.png
+           :scale: 25 %         
+
+.. image:: ./programmerpiskel.png
+            :scale: 25 %
+
+
+
 

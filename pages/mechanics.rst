@@ -5,19 +5,22 @@ Mechanics
 ------------------
 
 .. TODO: Leírni, hogy hogy tudnak például egymás mellett elmenni a karakterek.
+**NPC**
 
 Barátságos npc-k előtt elsétálhatunk, ebben az esetben nincs kollózió bekapcsolva.
 Barátságos npc például az Ördög (lásd karakterek menüpont)
 
+.. image:: ./devilseta.gif
+
 Ellenséges npc-ken, nem tudunk keresztül menni
 Emiatt muszáj átugranunk vagy másik utat választanunk hogyha el szeretnénk menni melletük.
+
+**Ládák**
 
 Kinyitható ládákon szintén át tudunk haladni, a láda kinyitása az "E" interakció gomb segítségével nyitható ki.
 Ekkor a láda tartalmát kiírja a játék, és a játékos inventory-jába kerül.
 
-A játékos lezárt ajtókkal is találkozhat, ezekhez szüksége lesz megfelelő színű kulcsokra.
-Amint a megfelelő kulccsal az ajtóhoz áll a főhős, és megnyomja az "E" interakció gombot, az ajtó kinyílik és áthaladhat!
-
+.. image:: ./chestseta.gif
 
 Harcrendszer
 ------------
@@ -26,14 +29,27 @@ Harcrendszer
 
 A főhősnek van egy semmilyen erőforrást nem igénylő közelharci támadása, ez viszont közel sem sebez annyit mint a speciális képességei.
 A közelharci támadáshoz a karakterünknek legalább 1 block közel kell kerüljön az ellenséges npc-hez, hogy eltalálja.
+A programozó karakternek speciális képessége a bögre hajítás, aminek nem szabad lebecsülni az erejét.
+Karakterünk emellett kihasználhatja a gyors mozgásképességét is mivel képes a karakter dash alkalmazására.
+
+**Dash**
+
+.. image:: ./dash.gif
+
+A dash-t tudjuk alkalmazni guggolás közben is, így újabb területekre is el tudunk jutni.
+
+**Slide**
+
+.. image:: ./slide.gif
+
 Az ellenséges npc-k is megpróbálnak a számukra megfelelő támadási távolsághoz kerülni.
 Ez pontosan A gépfegyveres kolléga esetén 10 block távolság.
 
-.. image:: ./thugnon.png
+.. image:: ./enemy.gif
 
 Amíg a Lángszórós rosszfiú esetén ez 3 block. Ez az a távolság ami elég az ellenséges npc-knek ahoz hogy ténylegesen eltalálja a támadása a főhősünket.
 
-.. image:: ./flame.png
+.. image:: ./enemyfire.gif
 
 Főhősünknek vannak speciális halálképességei ami manát igényelnek, de a sebzése igencsak több mint a közelharci támadás.
 
@@ -54,13 +70,13 @@ A karakter speciális támadásai közül:
 Erőforrások kezelése
 --------------------
 .. TODO: Arany, manna, bármi egyéb, ...
+.. image:: ./gold.png
+   :align: left
 
 **Arany**
 
-.. image:: ./gold.png
-
-.. image:: ./ordog.png
-
+.. image:: ./devil.png
+   :align: left
 
 Az arany, itt a pénznem amivel a játékos az ördögtől tud vásárolni upgrade-eket a képességeihez.
 Ezáltal több lehet a mana, élet, állóképesség töltéseinek a száma, és a halálképességeihez tartozó képesség fát is itt tudja kialakítani.
@@ -69,19 +85,31 @@ A játékos bármennyi aranyat tarthat magánál, nincs rá korlátozás.
 
 **Key**
 
-.. image:: ./programmerkulcs.gif
+.. list-table::
+   :align: left
 
-.. image:: ./keyblue.png
+   * - .. image:: ./programmerkulcs.gif
+ 
+     - .. image:: ./keyblue.png
+               :align: center
+               :scale: 200 %
+     - .. image:: ./keyred.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./keyred.png
+     - .. image:: ./yellowkey.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./yellowkey.png
+     - .. image:: ./greenkey.png
+             :scale: 200 %
+             :align: center
+     - .. image:: ./lada.gif
+             :align: center
+     - .. image:: ./ajto.gif
+             :align: center
 
-.. image:: ./greenkey.png
 
-.. image:: ./lada.gif
-
-.. image:: ./ajto.gif
 
 
 A játékosnak az előrehaladás érdekében kulcsokat kell gyűjteni, speciális ajtók és ládák kinyitásához.
@@ -130,20 +158,48 @@ Világgal való interakció
 A játékban nagy szerepük van a nyitható ajtóknak, ezeken csak akkor tud áthaladni a játékos, hogyha megszerezte hozzá a megfelelő színű kulcsot.
 Kulcsokból a játékban négy alapszín van.(Lásd Erőforrások)
 
-.. image:: ./keyblue.png
+.. list-table::
+   :align: left
 
-.. image:: ./keyred.png
+     - .. image:: ./keyblue.png
+               :align: center
+               :scale: 200 %
+     - .. image:: ./keyred.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./yellowkey.png
+     - .. image:: ./yellowkey.png
+             :scale: 200 %
+             :align: center
 
-.. image:: ./greenkey.png
+     - .. image:: ./greenkey.png
+             :scale: 200 %
+             :align: center
+     - .. image:: ./lada.gif
+             :align: center
+     - .. image:: ./ajto.gif
+             :align: center
 
-.. image:: ./lada.gif
-
-.. image:: ./ajto.gif
 
 A játékos lezárt ajtókkal is találkozhat, ezekhez szüksége lesz megfelelő színű kulcsra.
 Amint a megfelelő kulccsal az ajtóhoz áll a főhős, és megnyomja az "E" interakció gombot, az ajtó kinyílik és áthaladhat!
+
+**Ajtók**
+
+.. image:: ./ajto.gif
+
+A játékos lezárt ajtókkal is találkozhat, ezeken való áthaladáshoz, a játékosnak szüksége lesz megfelelő színű kulcsokra.
+Amint a megfelelő kulccsal az ajtóhoz áll a főhős, és megnyomja az "E" interakció gombot, az ajtó kinyílik és áthaladhat!
+Ekkor a kulcs elveszlik, de az ajtó továbbra is nyitvamarad későbbi használatokra.
+
+**Portálok**
+
+A szabadon felfedezhető világban előfordulhatnak portálok is.
+Ezek nem igényelnek kulcsot, és bármi más erőforrást, viszont nem tudhatja a játékos a portál éppen hová fogja átvinni.
+Mielőtt áthaladna a játékos a portálon, muszáj meggondolja azt, hogy megéri-e a kockázat. 
+Lehetséges hogy a portál másik oldalán, kellemetlen fogadtatás várja majd.
+
+.. image:: ./portalseta.gif
 
 A főhősnek számos csapdát is el kell kerülnie, mivel találkozhat kaladja során:
 
