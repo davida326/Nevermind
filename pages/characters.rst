@@ -16,7 +16,7 @@ Attribútumok
    * - .. image:: ./heart.png
          :align: center
 
-     - .. image:: ./potion_0.png
+     - .. image:: ./potion.gif
          :scale: 200 %
          :align: center
 
@@ -55,7 +55,7 @@ Az ellenfeleknek nincs ilyen attribútumuk.
 .. list-table::
    :align: left
    
-   * - .. image:: ./gold.png
+   * - .. image:: ./decil_coin.gif
          :align: center
      - .. image:: ./plus.png
          :align: center
@@ -80,21 +80,31 @@ Aranyat a játékos a legyőzött ellenségektől, küldetések teljesítéséve
 
 **Key**
 
+.. list-table::
+   :align: left
 
-.. image:: ./keyblue.png
+   * - .. image:: ./key_blue_anim.gif
          :scale: 150 %
+         :align: center
 
-.. image:: ./keyred.png
+     - .. image:: ./key_red_anim.gif
          :scale: 150 %
-.. image:: ./yellowkey.png
-         :scale: 150 %
-         
-.. image:: ./greenkey.png
-         :scale: 150 %
+         :align: center
 
-.. image:: ./lada.gif
+     - .. image:: ./key_yellow_anim.gif
+         :scale: 150 %
+         :align: center
 
-.. image:: ./ajto.gif
+     - .. image:: ./key_green_anim.gif
+         :scale: 150 %
+         :align: center
+
+     - .. image:: ./lada.gif
+         :align: center
+
+     - .. image:: ./ajto.gif
+         :align: center
+
 
 A játékosnak az előrehaladás érdekében kulcsokat kell gyűjteni, speciális ajtók és ládák kinyitásához.
 Kulcsokból négy féle változat létezik: piros, kék, zöld, sárga.

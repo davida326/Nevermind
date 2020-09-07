@@ -70,7 +70,7 @@ A karakter speciális támadásai közül:
 Erőforrások kezelése
 --------------------
 .. TODO: Arany, manna, bármi egyéb, ...
-.. image:: ./gold.png
+.. image:: ./decil_coin.gif
    :align: left
 
 **Arany**
@@ -90,18 +90,18 @@ A játékos bármennyi aranyat tarthat magánál, nincs rá korlátozás.
 
    * - .. image:: ./programmerkulcs.gif
  
-     - .. image:: ./keyblue.png
+     - .. image:: ./key_blue_anim.gif
                :align: center
                :scale: 200 %
-     - .. image:: ./keyred.png
+     - .. image:: ./key_red_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./yellowkey.png
+     - .. image:: ./key_yellow_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./greenkey.png
+     - .. image:: ./key_green_anim.gif
              :scale: 200 %
              :align: center
      - .. image:: ./lada.gif
@@ -161,18 +161,18 @@ Kulcsokból a játékban négy alapszín van.(Lásd Erőforrások)
 .. list-table::
    :align: left
 
-     - .. image:: ./keyblue.png
+     - .. image:: ./key_blue_anim.gif
                :align: center
                :scale: 200 %
-     - .. image:: ./keyred.png
+     - .. image:: ./key_red_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./yellowkey.png
+     - .. image:: ./key_yellow_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./greenkey.png
+     - .. image:: ./key_green_anim.gif
              :scale: 200 %
              :align: center
      - .. image:: ./lada.gif

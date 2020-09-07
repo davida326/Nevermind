@@ -10,23 +10,23 @@ Inventories
    
    * - .. image:: ./programmerkulcs.gif
                :align: center
-     - .. image:: ./gold.png
+     - .. image:: ./decil_coin.gif
                :align: center
-     - .. image:: ./keyblue.png
+     - .. image:: ./key_blue_anim.gif
                :align: center
                :scale: 200 %
-     - .. image:: ./keyred.png
+     - .. image:: ./key_red_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./yellowkey.png
+     - .. image:: ./key_yellow_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./greenkey.png
+     - .. image:: ./key_green_anim.gif
              :scale: 200 %
              :align: center
-     - .. image:: ./potion_0.png
+     - .. image:: ./potion.gif
              :scale: 200 %
              :align: center
 
@@ -52,18 +52,18 @@ pro tipp: érdemes lehet később összeszedni a kulcsokat, miután az ellenség
    :align: left
    
  
-   * - .. image:: ./keyblue.png
+   * - .. image:: ./key_blue_anim.gif
                :align: center
                :scale: 200 %
-     - .. image:: ./keyred.png
+     - .. image:: ./key_red_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./yellowkey.png
+     - .. image:: ./key_yellow_anim.gif
              :scale: 200 %
              :align: center
 
-     - .. image:: ./greenkey.png
+     - .. image:: ./key_green_anim.gif
              :scale: 200 %
              :align: center
      - .. image:: ./lada.gif
@@ -74,7 +74,7 @@ pro tipp: érdemes lehet később összeszedni a kulcsokat, miután az ellenség
 
 **Arany**
 
-.. image:: ./gold.png
+.. image:: ./decil_coin.gif
    :align: left
 
 Az arany, itt a pénznem amivel a játékos az ördögtől tud vásárolni upgrade-eket a képességeihez.
@@ -89,7 +89,7 @@ A játékos bármennyi aranyat tarthat magánál, nincs rá korlátozás.
 
 **Potion**
 
-.. image:: ./potion_0.png
+.. image:: ./potion.gif
       :scale: 200 %
       :align: left
 
