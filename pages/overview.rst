@@ -7,4 +7,4 @@ Alapkoncepció
 Játék típusa
 ------------
 
-Platformer/rpg/akció
+Platformer/RPG/akció

@@ -47,15 +47,11 @@ Billentyű és egér kezelés
 
 Interackióra szükségünk van:
 
-* Ajtók kinyitásához
-
-* Ládák kinyitásához
-
-* Semleges npc-kel való kommunikáláshoz
-
-* Lift kezeléséhez
-
-* Párbeszédek átugrásához
+* ajtók kinyitásához,
+* ládák kinyitásához,
+* semleges NPC-kel való kommunikáláshoz,
+* lift kezeléséhez,
+* párbeszédek átugrásához.
 
 Egérrel navigálhatunk a menü-ben, illetve az Ördög boltjában is.
 
@@ -85,17 +81,16 @@ Főmenüből elérhető:
 .. image:: ./menu.png
 
 * Játék indítása - Elindíjta a legutolsó játékot, az aktuális állapottal.
-
 * Beállítások -  beállítások menüpontban lehetőségünk van a billentyűzet kiosztás átállítására, felbontás, hang erősség beállítására.
-
 * Mentések betöltésére - itt előző játékok lementett állapotaitól folytathatjuk a játékot.
 
-A játékban beszélgethetünk semleges karakterekkel, ezek közül fontosabb kiemelést érdemel az Ördög karakter.
+A játékban beszélgethetünk semleges karakterekkel. Ezek közül fontosabb kiemelést érdemel az Ördög karakter.
 
 .. image:: ./devilspeech.png
 
 Nála vásárolhat a főhős, Speciális képességeihez fejlesztéseket, illetve passzív attribútum növelésre is van lehetősége, meghatározott mennyiségű aranyért cserébe.
 Itt menü rendszerben jelenik meg a vásárlás, ahol az egérrel vagy a nyilakkal navigálhat a felhasználó.
-Amint a játékos kijelöl valamit a várárlás menüben, annak megjelenik a hozzá tartozó ára.
-Ezt követően a játékostól kér egy megerősítést hogy biztosan meg szeretné-e venni azt a fejlesztést, és ha elfogadta a játékos, a fejlesztés aktiválódik.
+Amint a játékos kijelöl valamit a *Vásárlás* menüben, annak megjelenik a hozzá tartozó ára.
+Ezt követően a játékostól kér egy megerősítést, hogy biztosan meg szeretné-e venni azt a fejlesztést, és ha elfogadta a játékos, a fejlesztés aktiválódik.
 A fejlesztéseket csak az Ördög karakternél várásolhatja meg a játékos.
+
