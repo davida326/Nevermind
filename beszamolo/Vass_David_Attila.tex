@@ -1,0 +1,334 @@
+\documentclass[a4paper]{article}
+
+% Set margins
+\usepackage[hmargin=2.5cm, vmargin=3cm]{geometry}
+
+\frenchspacing
+
+% Language packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[magyar]{babel}
+
+% AMS
+\usepackage{amssymb,amsmath}
+
+% Graphic packages
+\usepackage{graphicx}
+
+% Colors
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Listings
+\usepackage{python}
+\usepackage{listings}
+
+% Question
+\newenvironment{question}[1]
+{\noindent\textcolor{OliveGreen}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Task
+\newenvironment{task}[1]
+{\noindent\textcolor{RoyalBlue}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Notification
+\newenvironment{notification}[1]
+{\noindent\textcolor{Peach}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Problem
+\newenvironment{problem}[1]
+{\noindent\textcolor{OrangeRed}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Solution
+\newenvironment{solution}
+{\color{RoyalBlue}}{\bigskip}
+
+% Comment
+\newenvironment{comment}
+{\color{Green}}{\bigskip}
+
+\lstset{% setup listings
+        framexleftmargin=16pt,
+        framextopmargin=6pt,
+        framexbottommargin=6pt, 
+        frame=single, rulecolor=\color{black}
+}
+
+%===============
+\begin{document}
+%===============
+
+\definecolor{codebg}{rgb}{0.99,0.99,0.99}
+\lstset{backgroundcolor=\color{codebg}}
+
+\begin{center}
+    \Large \textbf{Nyári szakmai gyakorlat -- Beszámoló}
+    
+	\bigskip
+	
+	\Large Vass Dávid Attila
+\end{center}
+
+\medskip
+
+\textit{Helyszín}: Miskolci Egyetem, Alkalmazott Matematikai Intézeti Tanszék
+
+\textit{Konzulens}: Piller Imre
+
+\bigskip
+
+A beszámolóban bemutatásra kerül az elvégzendő feladat, a játék specifikációjának fontosabb elemei, a demonstrációs célból elkészített alkalmazás felépítésének és működésének rövid áttekintése.
+
+\tableofcontents
+
+\section{Az elvégzendő feladat}
+
+A \textit{NeverMind} nevű számítógépes játék specifikálása, Demo-változatának elkészítése Godot játékmotor felhasználásával. A specifikáció a \textit{Sphinx} nevű dokumentáció készítő szoftver segítségével készül. Az elvégzett munkálatok követhetősége érdekében a kapott eredményeknek (dokumentációnak és forráskódnak) \textit{GitHub}-ra, egy külön repozitóriumba kell kerülnie. Az alkalmazás Csehi Mátéval együttműködve készüljün.
+
+\section{Karakterek specifikációja}
+
+\subsection{Attribútumok}
+
+\subsubsection{Élet attribútum}
+
+Az élet attribútum arra szolgál, hogy a felhasználó számára megjelenítse, hogy mennyi sebzést tud még elviselni az irányított karakter, mielőtt meghal.
+Játékon belül ez egy \textit{életcsík}ként jelenik meg (\ref{fig:heart}. ábra).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{images/heart.png}
+\caption{Az élet attribútum megjelenítési módja a játékban.}
+\label{fig:heart}
+\end{figure}
+
+Mivel az ellefelek sebzése véletlenszerű ezért a játékosnak folyton figyelemmel kell kísérnie, ha nem szeretne korán elhalálozni.
+Az ellenfeleknek is van élet attribútuma, és azoknál is ugyanígy működik.
+Amennyiben a játékost sebzés éri, lehetősége van az életét visszatölteni \textit{Health Potion} segítségével.
+
+\subsubsection{Állóképesség/kitartás (Stamina) attribútum}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{images/Stamina.png}
+\caption{Az állóképesség attribútum megjelenítési módja a játékban.}
+\label{fig:stamina}
+\end{figure}
+
+Néhány képesség, mint például a dupla ugrás és a "dash" használata Állóképesség erőforrást használ, így amikor igénybe veszi a játékos ezeket, csökken az Állóképessége.
+Ez az attribútum regenerálódik, amint a játékos nem használ ilyen erőforrást igényő képességet.
+Itt is, hasonlóan az élet attribútumhoz, a játékon belül \textit{staminacsík}ként jelenik meg (\ref{fig:stamina}. ábra).
+Az ellenfeleknek nincs ilyen attribútumuk.
+
+\subsubsection{Mana attribútum}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{images/Mana.png}
+\caption{A mana attribútum megjelenítési módja a játékban.}
+\label{fig:stamina}
+\end{figure}
+
+Ezt az erőforrást a játékos haláltípushoz kapcsolódó képességekkel veszi igénybe.
+Minden képesség támadáshoz manát fogyaszt, így figyelembe kell vennie a játékosnak, hogy egyáltalán van-e elég manája, a választott képességhez.
+A manaszint regenrálódik abban az esetben, ha a játékos aktuálisan nem használ manát igénybevevő képességet.
+Ez is (mint az Élet és Állóképesség attribútumok esetében) növelhető ugrade-ek vásárlásával.
+Az ellenfeleknek nincs ilyen attribútumuk.
+
+\subsubsection{Gold}
+
+Az aranynak a játékban fontos szerepe van mivel, ezt felhasználva vásárolhat a játékos az ördög NPC-től upgrade-eket.
+Lehetősége van a játékosnak képesség és attribútum növelő fejlesztések vásárlására.
+Aranyat a játékos a legyőzött ellenségektől, küldetések teljesítésével és a pálya egyes, rejtett részein szerezhet.
+
+\subsubsection{Kulcsok}
+
+A játékosnak az előrehaladás érdekében kulcsokat kell gyűjteni speciális ajtók és ládák kinyitásához.
+Kulcsokból négy féle változat létezik: piros, kék, zöld, sárga.
+Néhány ajtóhoz több különböző színű kulcs szükséges, hogy az ajtót ki lehessen nyitni.
+A kulcsok a pályán meghatározott helyeken el vannak rejtve, amiket a játékosnak meg kell találnia.
+A játékos egy színből egy kulcs lehet, így összesen négy különböző színű kulcsot tarthat magánál, amiket később felhasználhat ajtók kinyitásához.
+
+\subsection{Típusok}
+
+Egy fő karakter típus van. Haláltípustól függően a karakternek megváltozik a kinézete és a képessége.
+Ellenfélből két féle lesz: egy közelharci és egy távoli sebzési móddal rendelkező.
+
+\subsubsection{A főhős}
+
+A játék során a főhős az egyetlen irányítható karakter (\ref{fig:programmer}. ábra). Közelharci támadása bármilyen haláltípusnál használható, ami nem igényel manát.
+A közelharci támadáshoz legalább 1 block közel kell állnia a játékosnak az ellenféltől.
+
+Közelharci támadást minden haláltípus karakterrel végre lehet hajtani.
+A programozó karakter speciális képessége a bögréjének elhajítása.
+Ez elsőre nem tűnhet félelmetes támadásnak, ám igen hatékony, mivel a programozó karakternek nagy gyakorlata van benne.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=3]{images/programmer.png}
+\caption{A játék főhőse, a Programozó, bögrével a kezében.}
+\label{fig:programmer}
+\end{figure}
+
+Az attribútumai a következők.
+\begin{itemize}
+\item Sebzés: Bögre hajítás (1-3)
+\item Élet: 12
+\item Állóképesség: 12
+\item Mana: 12
+\item Mozgási sebesség: 300(Max)
+\item Karakter inventory: arany (helyi fizetőeszköz), kulcsok (maximum 4 db különböző színű kulcs lehet nála)
+\end{itemize}
+
+A különböző halálképességeinek sebzése 1.5-3.5 (kezdetben, ez később fejleszthető), ezeknek használata 3 manapont.
+A képességeket 2 másodperc lehülési idő elteltével használhatja.
+
+\subsubsection{A gépfegyveres kolléga}
+
+Ellenséges NPC, általában őrt áll valahol vagy éppen járőrözik.
+Amint a játékos bekerül a látóterébe, a kolléga megtámadja őt.
+A játékosnak vigyáznia kell vele mert ő távolról is képes igen nagy sebzést okozni. Érdemes fedezékből fedezékbe közelíteni hozzá.
+Az kollégának 15 block távolságú a látótere.
+
+Attribútumai:
+\begin{itemize}
+\item Sebzés: 2-4
+\item Élet: 8
+\item Mana: nincs
+\item Állóképesség: nincs
+\end{itemize}
+
+Amikor támad a játékosra, és az túl közel kerül, megpróbál elmenekülni és távolról újra felvenni vele a harcot.
+(megpróbál 10 block távolságra lenni tőle és újra tüzel)
+Mozgási sebesség: 250 (Max)
+
+\subsubsection{Lángszórós rosszfiú}
+
+Ellenséges NPC. Amint észreveszi a főhőst, megpróbál közel kerülni hozzá és a lángszórójával elégetni.
+
+Attribútumai:
+\begin{itemize}
+\item Sebzés: 1-3
+\item Élet: 10
+\item Mana: nincs
+\item Állóképesség: nincs
+\end{itemize}
+
+A játékos felhasználót 15 block távolságról kiszúrja, és ha nincs takarásban, elindul felé hogy támadjon.
+Mozgási sebesség: 150 (Max)
+
+\subsubsection{Ördög}
+
+%devilinhell.png
+
+Semleges NPC, a főhős főnöke.
+A játékos tőle tud vásárolni fejlesztéseket a speciális képességeihez, illetve passzív upgrade-eket is vehet, mint például Élet, Mana, Állóképesség növelés.
+A főhős, az "E" interakció gombbal tud vele kommunkálni.
+Gyakori monológja hogy: "Everything has a price..."
+
+\section{A főhős halálképességei}
+
+\subsection{Repülő halálképesség}
+
+A halálképességek beáltakor, ugyanazzal az élet/Állóképesség/mana attribútum mennyiséggel osztoznak a különböző karakterek.
+
+A főhőst, ha magas zuhanás általi halál éri, ez a haláltípus áll be nála.
+Passzív képességének tekinthető, hogy tud repülni és emiatt többé képtelen meghalni árokba zuhanástól.
+
+Speciális képességéhez a karmait használja, amit mélyen az ellenfélbe mélyeszt.
+Ennek a képességnek az ára 1 manatöltés.
+Miután használta a képességet, jelentkezni fog egy lehülési idő, ami 2 másodperc, ezt követően tudja újra használni a képességet, abban az esetben ha van elegendő manája.
+
+\begin{itemize}
+\item A képesség sebzése: 4
+\item Mozgási sebesség: 450 (Max)
+\end{itemize}
+
+\subsection{Tűz halálképesség}
+
+Abban az esetben veheti fel a játékos ezt a képességet, hogyha tűz általi halált hal.
+Ezt robbanó hordók, Lángszórós rosszfiú karakter tudja előidézni.
+Ekkor a játékos egy láng démonná alakul, és emiatt többet nem sebezheti a tűz/robbanás.
+
+Speciális képessége, hogy egy tűzgolyót tud lőni az ellensége felé.
+A képesség használata után 2 másodperc lehülési idő lép életbe.
+
+\begin{itemize}
+\item A képesség sebzése: 3-4
+\item Mozgási sebesség: 300 (Max)
+\end{itemize}
+
+\subsection{Vas halálképesség}
+
+Ezzel a képességgel akkor rendelkezik a játékos, hogy ha a gépfegyveres kolléga túl sokszor eltalálja és amiatt meghal.
+Főhősünk ezzel a halálképességgel fog újraéledni.
+
+Speciális képessége, hogy hosszú karjait használva egy erőütést tud végrehajtani.
+A képesség használata után 2 másodperc lehülési idő, lép életbe.
+
+\begin{itemize}
+\item A képesség sebzése: 3-5
+\item Mozgási sebesség: 200 (Max)
+\end{itemize}
+
+\section{Az alkalmazás elkészítése}
+
+A játék világának az elemei saját készítésűek/szerkesztésűek. A Godot nevű játékmotor és annak a GodotScript nevű programozási nyelve került felhasználásra. A grafikus elemek tervezése és magának az alkalmazáslogikának a megírása is közvetlenül a Godot fejlesztőkörnyezetében készült.
+
+A játék elemei az OOP elveknek megfelelő külön modulokba kerültek. Például az ajtó definíciója a \texttt{door.gd} állományban került részletezésre, amely tartalma a következőképpen néz ki.
+\begin{python}
+extends Node2D
+
+var area = false
+var player = null
+
+func _process(delta):
+    if area:
+        if Input.is_action_just_pressed("ui_interact"):
+            $Area2D/AnimatedSprite.play("open")
+            player.global_position = get_parent().get_node(self.get_name()).
+                get_node("Position2D").global_position
+            player.global_position += Vector2(16, 34)
+
+func _on_Area2D_body_entered(body):
+    if body.get_name() == "programmer":
+        player = body
+        if body.get_node("Camera2D").get_node("key_bar").
+            get_node($Label.text).visible:
+            area = true
+
+func _on_Area2D_body_exited(body):
+    if body.get_name() == "programmer":
+        player = null
+        area = false
+\end{python}
+
+A Godot egy eseményvezérelt környezetet biztosít.
+
+A program fontosabb szerkezeti elemei így a szkriptek (\texttt{scripts}), színterek (\texttt{scenes}), textúrák (\texttt{textures}) és tile szettek (\texttt{tile\_sets}).
+
+\end{document}

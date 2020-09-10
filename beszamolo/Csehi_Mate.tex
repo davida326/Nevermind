@@ -1,0 +1,367 @@
+\documentclass[a4paper]{article}
+
+% Set margins
+\usepackage[hmargin=2.5cm, vmargin=3cm]{geometry}
+
+\frenchspacing
+
+% Language packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[magyar]{babel}
+
+% AMS
+\usepackage{amssymb,amsmath}
+
+% Graphic packages
+\usepackage{graphicx}
+
+% Colors
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Listings
+\usepackage{python}
+\usepackage{listings}
+
+% Question
+\newenvironment{question}[1]
+{\noindent\textcolor{OliveGreen}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Task
+\newenvironment{task}[1]
+{\noindent\textcolor{RoyalBlue}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Notification
+\newenvironment{notification}[1]
+{\noindent\textcolor{Peach}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Problem
+\newenvironment{problem}[1]
+{\noindent\textcolor{OrangeRed}{$\circ$ \textit{#1}}
+
+\smallskip
+
+\color{Gray}
+
+}{\bigskip}
+
+% Solution
+\newenvironment{solution}
+{\color{RoyalBlue}}{\bigskip}
+
+% Comment
+\newenvironment{comment}
+{\color{Green}}{\bigskip}
+
+\lstset{% setup listings
+        framexleftmargin=16pt,
+        framextopmargin=6pt,
+        framexbottommargin=6pt, 
+        frame=single, rulecolor=\color{black}
+}
+
+%===============
+\begin{document}
+%===============
+
+\definecolor{codebg}{rgb}{0.99,0.99,0.99}
+\lstset{backgroundcolor=\color{codebg}}
+
+\begin{center}
+    \Large \textbf{Nyári szakmai gyakorlat -- Beszámoló}
+    
+	\bigskip
+	
+	\Large Csehi Máté
+\end{center}
+
+\medskip
+
+\textit{Helyszín}: Miskolci Egyetem, Alkalmazott Matematikai Intézeti Tanszék
+
+\textit{Konzulens}: Piller Imre
+
+\bigskip
+
+A beszámolóban bemutatásra kerül az elvégzendő feladat, a játék specifikációjának fontosabb elemei, a demonstrációs célból elkészített alkalmazás felépítésének és működésének rövid áttekintése.
+
+\tableofcontents
+
+\section{Az elvégzendő feladat}
+
+A \textit{NeverMind} nevű számítógépes játék specifikálása, Demo-változatának elkészítése Godot játékmotor felhasználásával. A specifikáció a \textit{Sphinx} nevű dokumentáció készítő szoftver segítségével készül. Az elvégzett munkálatok követhetősége érdekében a kapott eredményeknek (dokumentációnak és forráskódnak) \textit{GitHub}-ra, egy külön repozitóriumba kell kerülnie. A fejlesztés Vass Dávid Attilával együttműködve készüljün.
+
+\section{A játék világának mechanikája}
+
+\subsection{Ütközések kezelése}
+
+A játékban vannak nem játékos karakterek (\textit{Non Player Character}, röviden NPC).
+Barátságos NPC-k előtt elsétálhatunk, ebben az esetben nincs kollózió bekapcsolva.
+Barátságos NPC például az Ördög.
+
+Ellenséges NPC-ken, nem tudunk keresztül menni,
+emiatt muszáj átugranunk vagy másik utat választanunk, hogy ha el szeretnénk menni melletük.
+
+Kinyitható ládákon szintén át tudunk haladni. A láda kinyitása az "E" interakció gomb segítségével nyitható ki.
+Ekkor a láda tartalmát kiírja a játék, és a játékos \textit{inventory}jába kerül.
+
+\subsection{Harcrendszer}
+
+A főhősnek van egy semmilyen erőforrást nem igénylő közelharci támadása, ez viszont közel sem sebez annyit, mint a speciális képességei.
+A közelharci támadáshoz a karakterünk legalább 1 block közel kell kerüljön az ellenséges NPC-hez, hogy eltalálja.
+
+A programozó karakternek speciális képessége a bögre hajítás, aminek nem szabad lebecsülni az erejét.
+Karakterünk emellett kihasználhatja a gyors mozgásképességét is, mivel képes a karakter dash alkalmazására.
+
+\subsection{Dash}
+
+A dash-t tudjuk alkalmazni guggolás közben is, így újabb területekre is el tudunk jutni.
+
+\subsection{Slide}
+
+Az ellenséges NPC-k is megpróbálnak a számukra megfelelő támadási távolsághoz kerülni.
+Ez pontosan A gépfegyveres kolléga esetén 10 block távolság.
+
+Amíg a Lángszórós rosszfiú esetén ez 3 block. Ez az a távolság ami elég az ellenséges NPC-knek ahoz hogy ténylegesen eltalálja a támadása a főhősünket.
+
+Főhősünknek vannak speciális halálképességei ami manát igényelnek, de a sebzése jelentősen több, mint a közelharci támadás.
+
+A karakter speciális támadásai közül:
+\begin{itemize}
+\item \textbf{légi halálképesség}: 2 block távolságra van szükség, annak érdekében hogy el tudja találni az ellenfelet.
+\item \textbf{tűz halálképesség}: 8 block távolságra van szükségünk, mivel ez egy távolharci képesség.
+\item \textbf{vas halálképesség}: 4 block távolságra van szükség, hogy sikeresen eltaláljuk az ellenfelet.
+\end{itemize}
+
+\subsection{Erőforrások kezelése}
+
+\subsubsection{Arany}
+
+Az arany, itt a pénznem amivel a játékos az ördögtől tud vásárolni upgrade-eket a képességeihez.
+Ezáltal több lehet a mana, élet, állóképesség töltéseinek a száma és a halálképességeihez tartozó képesség fát is itt tudja kialakítani.
+Aranyat a játékos a legyőzött ellenfeleinél találhat, illetve elrejtett ládákban.
+A játékos bármennyi aranyat tarthat magánál, nincs rá korlátozás.
+
+\subsubsection{Kulcs}
+
+A játékosnak az előrehaladás érdekében kulcsokat kell gyűjteni, speciális ajtók és ládák kinyitásához.
+Kulcsokból négy féle változat létezik: piros, kék, zöld, sárga.
+Néhány ajtóhoz több különböző színű kulcs szükséges, hogy az ajtót ki lehessen nyitni.
+A kulcsok a pályán meghatározott helyen, el vannak rejtve, amiket a játékosnak meg kell találnia.
+A játékos egy színből egy kulcsot tárolhat, így összesen négy különböző színű kulcsot tarthat magánál, amiket később felhasználhat ajtók kinyitásához.
+
+\subsubsection{Élet attribútum}
+
+Az élet attribútum arra szolgál hogy, a felhasználó számára megjelenítse mennyi sebzést tud még elviselni, mielőtt meghal.
+Ez az attribútum a játékban úgy néz ki hogy, van egy elem amiben vannak töltések.
+Minden töltés két részből áll, amint sebzés éri a játékost, a töltés kettéhasad és a fele marad meg.
+Kezdetben három egész töltéssel kezd a játékos, ami később növelhető upgrade-ek vásárlásával.
+Az ellenfeleknek is van élet attribútuma, és annál is ugyanígy működik.
+
+\subsubsection{Állóképesség/kitartás(Stamina) attribútum}
+
+Néhány képesség, mint például a sprintelés és a "dash" használata Állóképesség erőforrást használ, így amikor igénybe veszi a játékos ezeket, csökken az Állóképessége.
+Ez az attribútum regenerálódik, amint a játékos nem használ ilyen erőforrást igényő képességet.
+Itt is hasonlóan az élet attribútumhoz, kezdetben 3 töltéssel kell gazdálkodnia a játékosnak.
+
+\subsubsection{Mana attribútum}
+
+Ezt az erőforrást a játékos haláltípushoz kapcsolódó képességekkel veszi igénybe.
+Minden képesség támadáshoz fél manatöltést használ. A manatöltések regenerálódnak abban az esetben, ha a játékos nem használ manát igénybevevő képességet.
+Itt is, mint az Élet és Állóképesség attribútumok is növelhetők ugrade-ek vásárlásával.
+A mana töltések száma három darab.
+
+\subsection{Világgal való interakció}
+
+A játékban nagy szerepük van a nyitható ajtóknak, ezeken csak akkor tud áthaladni a játékos, hogy ha megszerezte hozzá a megfelelő színű kulcsot.
+Kulcsokból a játékban négy alapszín van (Lásd Erőforrások).
+
+A játékos lezárt ajtókkal is találkozhat. Ezekhez szüksége lesz megfelelő színű kulcsra.
+Amint a megfelelő kulccsal az ajtóhoz áll a főhős, és megnyomja az "E" interakció gombot, az ajtó kinyílik és áthaladhat!
+
+\subsubsection{Ajtók}
+
+A játékos lezárt ajtókkal is találkozhat, ezeken való áthaladáshoz, a játékosnak szüksége lesz megfelelő színű kulcsokra.
+Amint a megfelelő kulccsal az ajtóhoz áll a főhős, és megnyomja az "E" interakció gombot, az ajtó kinyílik és áthaladhat!
+Ekkor a kulcs elvész, de az ajtó továbbra is nyitvamarad későbbi használatokra.
+
+\subsubsection{Portálok}
+
+A szabadon felfedezhető világban előfordulhatnak portálok is.
+Ezek nem igényelnek kulcsot, és bármi más erőforrást, viszont nem tudhatja a játékos a portál éppen hová fogja átvinni.
+Mielőtt áthaladna a játékos a portálon, muszáj meggondolja azt, hogy megéri-e a kockázat. 
+Lehetséges hogy a portál másik oldalán, kellemetlen fogadtatás várja majd.
+
+A főhősnek számos csapdát is el kell kerülnie, mivel találkozhat kaladja során:
+\begin{itemize}
+\item szakadékba vagy tűzbe vezető csapóajtókkal,
+\item robbanó hordókkal,
+\item félelmetes szakadékokkal.
+\end{itemize}
+
+A robbanó hordók esetén, nem elég a játékosnak nem megsebezni őket, hanem figyelnie kell hogy az ellenséges NPC-k se tegyék meg.
+Amint a hordót sebzés éri, felrobban és a hatótávolságán belül mindenkit sebzés ér és meggyulladnak a karakterek.
+(A robbantás hatótávolsága 5 block)
+
+\section{Implementációval kapcsolatos észrevételek}
+
+Az alkalmazás logikája GodotScript nyelven került implementálásra. A következőkben erre egy példát láthatunk, részletezve a nyelv sajátosságait. Erre az ellenfél megvalósításának bemutatása tünt megfelelő választásnak.
+
+A szkriptek elején szerepel, hogy az milyen osztály bővít ki, illetve azt követően kerülnek definiálásra és inicializálásra a konstansok és globális változók.
+\begin{python}
+extends KinematicBody2D
+
+const UP = Vector2(0, -1)
+const GRAVITY = 20
+const BULLET = preload("res://scenes/bullet.tscn")
+
+var motion = Vector2(100, 0)
+var facing = false #right = false, left = true
+var gun_ready = true
+var agro = false
+var aa = false
+var see = false
+var player = null
+var health = 8
+\end{python}
+
+Az ellenfél akciói külön függvényekbe kerültek.
+\begin{python}
+func damage(value):
+    health -= value
+    if health <= 0:
+        queue_free()
+
+func fire(body):
+    if gun_ready:
+        var bullet = BULLET.instance()
+        get_parent().call_deferred("add_child", bullet)
+        bullet.global_rotation = get_angle_to(body.global_position)
+        gun_ready = false
+        $reload.start()
+
+func turn():
+    facing = not facing
+    motion.x *= -1
+    $Gun.position.x *= -1
+    $RayCast2D.position.x *= -1
+    $AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
+    $vision/CollisionShape2D.rotation_degrees += 180
+
+func face_to(body):
+    if body.global_position.x - global_position.x < 0:
+        facing = true
+        if abs(body.global_position.x - global_position.x) < 128:
+            motion.x = 100
+        elif abs(body.global_position.x - global_position.x) > 256:
+            motion.x = -100
+        else:
+            motion.x = 0
+        $AnimatedSprite.flip_h = facing
+        $Gun.position.x = -28
+        $RayCast2D.position.x = 15
+    else:
+        facing = false
+        if abs(body.global_position.x - global_position.x) < 128:
+            motion.x = -100
+        elif abs(body.global_position.x - global_position.x) > 224:
+            motion.x = 100
+        else:
+            motion.x = 0
+        $AnimatedSprite.flip_h = facing
+        $Gun.position.x = 28
+        $RayCast2D.position.x = 15
+
+func reset(direction):
+    facing = direction
+    $AnimatedSprite.flip_h = direction
+    if direction:
+        $Gun.position.x = -28
+        $vision/CollisionShape2D.rotation_degrees = 180
+        $RayCast2D.position.x = -15
+        motion.x = -100
+    else:
+        $Gun.position.x = 28
+        $vision/CollisionShape2D.rotation_degrees = 0
+        $RayCast2D.position.x = 15
+        motion.x = 100
+
+func _ready():
+    $see_player.add_exception($vision/CollisionShape2D)
+    $see_player.add_exception($CollisionShape2D)
+
+func _physics_process(delta):
+    motion.y += GRAVITY
+    if see and player != null:
+        $see_player.set_cast_to(player.global_position - global_position)
+        if $see_player.get_collider() != null:
+            if $see_player.get_collider().get("name") == "programmer":
+                agro = true
+    if agro:
+        face_to(player)
+        $vision/CollisionShape2D.rotation =
+            get_angle_to(player.global_position)
+        $see_player.set_cast_to(player.global_position - global_position)
+        if $see_player.get_collider() != null:
+            if $see_player.get_collider().get("name") != "programmer"
+                and not aa:
+                $agro.start()
+                aa = true
+            if $see_player.get_collider().get("name") == "programmer":
+                aa = false
+                $agro.stop()
+        fire(player)
+    elif $AnimatedSprite.flip_h:
+        motion.x = -100
+    else:
+        motion.x = 100
+    motion = move_and_slide(motion, UP)
+    if is_on_wall() and not agro:
+        turn()
+    if not $RayCast2D.is_colliding() and not agro:
+        turn()
+
+func _on_reload_timeout():
+    gun_ready = true
+
+func _on_vision_body_entered(body):
+    if body.get_name() == "programmer":
+        $see_player.set_cast_to(body.global_position - global_position)
+        see = true
+        player = body
+
+func _on_vision_body_exited(body):
+    if body.get_name() == "programmer":
+        $agro.autostart = true
+        aa = true
+        see = false
+
+func _on_agro_timeout():
+    agro = false
+    aa = false
+    player = null
+    reset($AnimatedSprite.flip_h)
+\end{python}
+
+A példában bemutatott programhoz hasonlóképpen készült a játék többi eleme is.
+
+\end{document}
